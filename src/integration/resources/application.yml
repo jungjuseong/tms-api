@@ -18,11 +18,11 @@ spring.jpa:
   properties.hibernate.format_sql: true
 
 # Flyway configuration
-#spring.flyway:
-#    url: jdbc:mysql://localhost:3306/roouty?uselSSL=false&serverTimezone=UTC&characterEncoding=UTF-8
-#    schemas: roouty
-#    user: admin
-#    password: admin!@3
+spring.flyway:
+  url: jdbc:mysql://localhost:3306/roouty?uselSSL=false&serverTimezone=UTC&characterEncoding=UTF-8
+  schemas: roouty
+  user: root
+  password: admin!@3
 
 # Security configuration
 # Keystore/keys generated using JDK have validity of three months.

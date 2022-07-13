@@ -80,9 +80,9 @@ jacocoTestReport {
             fileTree(
                 dir: it,
                 exclude: [
-                    'com/packt/modern/api/model/*',
-                    'com/packt/modern/api/*Api.*',
-                    'com/packt/modern/api/security/UNUSED/*',
+                    'com/roouty/tms/api/model/*',
+                    'com/roouty/tms/api/*Api.*',
+                    'com/roouty/tms/api/security/UNUSED/*',
                 ])
         }))
     }
@@ -121,8 +121,9 @@ dependencies {
 
     // DB Starts
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.flywaydb:flyway-core'
-    runtimeOnly 'com.h2database:h2'
+    //implementation 'org.flywaydb:flyway-core'
+    runtimeOnly group: 'mysql', name: 'mysql-connector-java', version: '8.0.27'
+    //runtimeOnly 'com.h2database:h2'
     // DB Ends
 
     // Security Starts
