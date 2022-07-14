@@ -78,8 +78,7 @@ create TABLE IF not EXISTS user (
 	id BINARY(16) not NULL,
 	username varchar(16),
 	password varchar(72),
-	first_name varchar(16),
-	last_name varchar(16),
+	full_name varchar(40),
 	email varchar(24),
 	phone varchar(24),
 	user_status varchar(16) not NULL DEFAULT 'ACTIVE',
@@ -217,3 +216,4 @@ INSERT INTO item VALUES
 INSERT INTO order_item VALUES
   (UUID_TO_BIN('66682caa-a6d8-46ed-a173-ff822f754e1c'), UUID_TO_BIN('0a59ba9f-629e-4445-8129-b9bce1985d6a'), UUID_TO_BIN('a7384042-e4aa-4c93-85ae-31a346dad704')),
   (UUID_TO_BIN('efeefa71-2760-412a-9ec8-0a040d90f02c'), UUID_TO_BIN('0a59ba9f-629e-4445-8129-b9bce1985d6a'), UUID_TO_BIN('a7384042-e4aa-4c93-85ae-31a346dad705'));
+
