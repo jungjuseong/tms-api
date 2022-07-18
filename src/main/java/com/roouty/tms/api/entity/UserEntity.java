@@ -39,11 +39,8 @@ public class UserEntity {
   @Column(name = "PASSWORD")
   private String password;
 
-  @Column(name = "FIRST_NAME")
-  private String firstName;
-
-  @Column(name = "LAST_NAME")
-  private String lastName;
+  @Column(name = "NAME")
+  private String name;
 
   @Column(name = "EMAIL")
   private String email;
@@ -102,21 +99,12 @@ public class UserEntity {
     return this;
   }
 
-  public String getFirstName() {
-    return firstName;
+  public String getName() {
+    return name;
   }
 
-  public UserEntity setFirstName(String firstName) {
-    this.firstName = firstName;
-    return this;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public UserEntity setLastName(String lastName) {
-    this.lastName = lastName;
+  public UserEntity setName(String name) {
+    this.name = name;
     return this;
   }
 
@@ -199,8 +187,7 @@ public class UserEntity {
         "id=" + id +
         ", username='" + username + '\'' +
         ", password='" + password + '\'' +
-        ", firstName='" + firstName + '\'' +
-        ", lastName='" + lastName + '\'' +
+        ", name='" + name + '\'' +
         ", email='" + email + '\'' +
         ", phone='" + phone + '\'' +
         ", userStatus='" + userStatus + '\'' +

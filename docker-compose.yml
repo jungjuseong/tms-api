@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  tms-api:
+    container_name: "tms-api"
+    image: tms-api:1.0.0
+    environment:
+      - VROOM=http://vroom-api
+      - OSRM=http://osrm-api
+#    expose: "8080"
+    ports:
+      - "8080:8080"

@@ -1,5 +1,30 @@
 create schema if not exists roouty;
 
+
+DELIMITER //
+
+CREATE FUNCTION IF not EXISTS BIN_TO_UUID(b BINARY(16))
+RETURNS CHAR(36)
+BEGIN
+   DECLARE hexStr CHAR(32);
+   SET hexStr = HEX(b);
+   RETURN LOWER(CONCAT(
+        SUBSTR(hexStr, 1, 8), '-',
+        SUBSTR(hexStr, 9, 4), '-',
+        SUBSTR(hexStr, 13, 4), '-',
+        SUBSTR(hexStr, 17, 4), '-',
+        SUBSTR(hexStr, 21)
+    ));
+END//
+
+CREATE FUNCTION IF not EXISTS UUID_TO_BIN(uuid CHAR(36))
+RETURNS BINARY(16)
+BEGIN
+    RETURN UNHEX(REPLACE(uuid, '-', ''));
+END//
+
+DELIMITER ;
+
 create TABLE IF not EXISTS roouty.product (
 	id binary(16) not NULL,
 	name varchar(150) not NULL,
@@ -78,7 +103,7 @@ create TABLE IF not EXISTS user (
 	id BINARY(16) not NULL,
 	username varchar(16),
 	password varchar(72),
-	full_name varchar(40),
+	name varchar(40),
 	email varchar(24),
 	phone varchar(24),
 	user_status varchar(16) not NULL DEFAULT 'ACTIVE',
@@ -198,8 +223,8 @@ create TABLE IF not EXISTS cart_item (
 	FOREIGN KEY(item_id) REFERENCES item(id)
 );
 
-insert into user (id, username, password, first_name, last_name, email, phone, user_status, role) values(UUID_TO_BIN('a1b9b31d-e73c-4112-af7c-b68530f38222'), 'scott', '{bcrypt}$2a$10$neR0EcYY5./tLVp4litNyuBy/kfrTsqEv8hiyqEKX0TXIQQwC/5Rm', 'Bruce', 'Scott', 'bruce@scott.db', '234234234', 'ACTIVE', 'USER');
-insert into user (id, username, password, first_name, last_name, email, phone, user_status, role) values(UUID_TO_BIN('a1b9b31d-e73c-4112-af7c-b68530f38223'), 'scott2', '{bcrypt}$2a$10$neR0EcYY5./tLVp4litNyuBy/kfrTsqEv8hiyqEKX0TXIQQwC/5Rm', 'Bruce', 'Scott', 'bruce2@scott.db', '234234234', 'ACTIVE', 'ADMIN');
+insert into user (id, username, password, name, email, phone, user_status, role) values(UUID_TO_BIN('a1b9b31d-e73c-4112-af7c-b68530f38222'), 'scott', '{bcrypt}$2a$10$neR0EcYY5./tLVp4litNyuBy/kfrTsqEv8hiyqEKX0TXIQQwC/5Rm', 'Bruce Scott', 'bruce@scott.db', '234234234', 'ACTIVE', 'USER');
+insert into user (id, username, password, name, email, phone, user_status, role) values(UUID_TO_BIN('a1b9b31d-e73c-4112-af7c-b68530f38223'), 'scott2', '{bcrypt}$2a$10$neR0EcYY5./tLVp4litNyuBy/kfrTsqEv8hiyqEKX0TXIQQwC/5Rm', 'Bruce Scott', 'bruce2@scott.db', '234234234', 'ACTIVE', 'ADMIN');
 INSERT INTO address VALUES (UUID_TO_BIN('a731fda1-aaad-42ea-bdbc-a27eeebe2cc0'), '9I-999', 'Fraser Suites Le Claridge', 'Champs-Elysees', 'Paris', 'Île-de-France', 'France', '75008');
 insert into user_address values (UUID_TO_BIN('a1b9b31d-e73c-4112-af7c-b68530f38222'), UUID_TO_BIN('a731fda1-aaad-42ea-bdbc-a27eeebe2cc0'));
 INSERT INTO card VALUES (UUID_TO_BIN('618ffaff-cbcd-48d4-8848-a15601e6725b'), '999-999-999-999', UUID_TO_BIN('a1b9b31d-e73c-4112-af7c-b68530f38222'), 'User', '12/28', '0000');
